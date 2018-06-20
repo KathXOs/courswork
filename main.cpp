@@ -20,7 +20,7 @@ public:
 	{
 		char l[20];
 		ofstream Fr("C:\\real.txt", ios::app);
-		
+		cin.getline(l,20);
 		cout << "state: ";
 		cin.getline(l,20);
 		Fr << l <<endl;
@@ -49,7 +49,7 @@ public:
 	{
 		char l[20];
 		ofstream Fv("C:\\virt.txt", ios::app);
-		
+		cin.getline(l,20);
 		cout << "state: ";
 		cin.getline(l,20);
 		Fv << l <<endl;
@@ -65,6 +65,7 @@ public:
 		cout << "material:  ";
 		cin.getline(l,20);
 		Fv<<l<<endl;
+		Fv<<endl;
 	
 
 	return 0;
@@ -80,8 +81,8 @@ class Man
 	{
 		ofstream Fr("C:\\real.txt");
 		ofstream Fv("C:\\virt.txt");
-		cout << "vvedite kol-vo marok"<< endl;
-		cin >> N;
+		//cout << "vvedite kol-vo marok"<< endl;
+		//cin >> N;
 
 		return 0;
 	}
@@ -134,10 +135,12 @@ class Man
 					Fv<<l<<endl;
 					count ++;
 				}
+			
 				
 			}
 		}
 		
+		cout << "download" << endl;
 		return 0;
 	}	
 	
@@ -180,6 +183,7 @@ class Man
 		int uplS ()
 	{
 		char l[255];
+		int count=0;
 		ofstream fin("C:\\fin.txt");
 		
 		ifstream fr ("C:\\real.txt");
@@ -187,8 +191,14 @@ class Man
 		fin << "-------Real state--------\n";
 		while (!fr.eof())
 		{
+			while(count<5)
+			{
 			fr.getline(l,255);
 			fin << l << "\n";
+			count++;
+			}
+			count=0;
+			fin << "\n";
 		}
 		fr.close();
 		
@@ -198,17 +208,23 @@ class Man
 		fin << "\n\n--------Virtual state--------\n";
 		while (!fv.eof())
 		{
+			while(count<5)
+			{
 			fv.getline(l,255);
 			fin << l << "\n";
+			count++;
+			}
+			count=0;
+			fin << "\n";
 		}
 		fv.close();
 		
-		
+		cout << "saved" << endl;
 		
 		return 0;
 	}	
 	
-	~Man();
+
 	
 public:
 			int menu ()
@@ -217,7 +233,11 @@ public:
 		createS();
 		while (sw!=0)
 		{
-		cout << "do: /n 1-show sbornik /n  2-upload into file /n 3-add /n 0-exit" << endl;
+		cout << "do: " << endl;
+		cout <<"1-show sbornik" << endl;
+		cout <<"2-upload into file" << endl; 
+		cout <<"3-add" << endl; 
+		cout <<"0-exit" << endl;
 		cin >> sw;
 		switch (sw)
 		{  
