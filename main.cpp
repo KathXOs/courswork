@@ -1,12 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <stdio.h>
-#include <string>
 #include <fstream>
-#include <iomanip>
-#include <conio.h>
-#include <sstream>
-#include <cmath>
 
 using namespace std;
 
@@ -25,25 +18,25 @@ public:
 	int createM ()
 	
 	{
-		char l[255];
-		ofstream Fr("C:\real.txt");
+		char l[20];
+		ofstream Fr("C:\\real.txt", ios::app);
 		
 		cout << "state: ";
-		gets(l);
+		cin.getline(l,20);
 		Fr << l <<endl;
-		cout << "appointment: ";
-		gets(l);
+		cout << "\n appointment: ";
+		cin.getline(l,20);
 		Fr<<l<<endl;
-		cout << "issuer: ";
-		gets(l);
+		cout << "\n issuer: ";
+		cin.getline(l,20);
 		Fr<<l<<endl;
 		cout << "form: ";
-		gets(l);
+		cin.getline(l,20);
 		Fr<<l<<endl;
 		cout << "material:  ";
-		gets(l);
+		cin.getline(l,20);
 		Fr<<l<<endl;
-		//Fr.close;
+		
 		
 	return 0;
 }
@@ -54,25 +47,25 @@ class virtM: public Marka
 public:
 	int createM ()
 	{
-		char l[255];
-		ofstream Fv("C:\real.txt");
+		char l[20];
+		ofstream Fv("C:\\virt.txt", ios::app);
 		
 		cout << "state: ";
-		gets(l);
+		cin.getline(l,20);
+		Fv << l <<endl;
+		cout << " appointment: ";
+		cin.getline(l,20);
 		Fv<<l<<endl;
-		cout << "appointment: ";
-		gets(l);
-		Fv<<l<<endl;
-		cout << "issuer: ";
-		gets(l);
+		cout << " issuer: ";
+		cin.getline(l,20);
 		Fv<<l<<endl;
 		cout << "form: ";
-		gets(l);
+		cin.getline(l,20);
 		Fv<<l<<endl;
 		cout << "material:  ";
-		gets(l);
+		cin.getline(l,20);
 		Fv<<l<<endl;
-		//Fv.close;
+	
 
 	return 0;
 
@@ -85,6 +78,8 @@ class Man
 	int N,st;
 	int createS ()
 	{
+		ofstream Fr("C:\\real.txt");
+		ofstream Fv("C:\\virt.txt");
 		cout << "vvedite kol-vo marok"<< endl;
 		cin >> N;
 
@@ -110,15 +105,15 @@ class Man
 	int downlS ()
 	{
 		char l[255];
-		ifstream F("C:\sbornik.txt");
+		ifstream F("C:\\sbornik.txt");
 		
 		while (!F.eof())
 		{
 			F.getline(l,255);
-			if (l[1] =='r')
+			if (l[0] =='r')
 			{
 				int count=0;
-				ofstream Fr("C:\real.txt");
+				ofstream Fr("C:\\real.txt", ios::app);
 				
 				while(count<5)
 				{
@@ -126,12 +121,12 @@ class Man
 					Fr<<l<<endl;
 					count ++;
 				}
-				//Fr.close;
+				
 			}
 			else
 			{
 				int count=0;
-				ofstream Fv("C:\virt.txt");
+				ofstream Fv("C:\\virt.txt", ios::app);
 				
 				while(count<5)
 				{
@@ -139,10 +134,10 @@ class Man
 					Fv<<l<<endl;
 					count ++;
 				}
-				//Fv.close;
+				
 			}
 		}
-		//F.close;
+		
 		return 0;
 	}	
 	
@@ -171,10 +166,13 @@ class Man
 	{
 		char l[255];
 		uplS();
-		ifstream fin("C:\fin.txt");
-		
+		ifstream fin("C:\\fin.txt");
+		while (!fin.eof())
+		{
 		fin.getline(l,255);
 		cout << l;
+		cout<<endl;
+		}
 		
 		return 0;
 	}	
@@ -182,9 +180,9 @@ class Man
 		int uplS ()
 	{
 		char l[255];
-		ofstream fin("C:\fin.txt");
+		ofstream fin("C:\\fin.txt");
 		
-		ifstream fr ("C:\real.txt");
+		ifstream fr ("C:\\real.txt");
 		
 		fin << "-------Real state--------\n";
 		while (!fr.eof())
@@ -195,7 +193,7 @@ class Man
 		fr.close();
 		
 		
-		ifstream fv ("C:\virt.txt");
+		ifstream fv ("C:\\virt.txt");
 		
 		fin << "\n\n--------Virtual state--------\n";
 		while (!fv.eof())
@@ -205,17 +203,18 @@ class Man
 		}
 		fv.close();
 		
-		//fin.close;
+		
 		
 		return 0;
 	}	
 	
-	//~Man();
+	~Man();
 	
 public:
 			int menu ()
 	{
 		int sw;
+		createS();
 		while (sw!=0)
 		{
 		cout << "do: /n 1-show sbornik /n  2-upload into file /n 3-add /n 0-exit" << endl;
