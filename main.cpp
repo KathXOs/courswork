@@ -5,12 +5,14 @@
 #include <fstream>
 #include <iomanip>
 #include <conio.h>
+#include <sstream>
+#include <cmath>
 
 using namespace std;
 
 class Marka 
 {
-	int mmm;
+	void mmm();
 public:
 	virtual int createM() =0;
 	
@@ -23,27 +25,28 @@ public:
 	int createM ()
 	
 	{
-		string l;
-		ofstream Fr;
-		Fr("real.txt");
+		char l[255];
+		ofstream Fr("C:\real.txt");
+		
 		cout << "state: ";
-		cin >> l >> endl;
-		Fr<<l<<endl;
+		gets(l);
+		Fr << l <<endl;
 		cout << "appointment: ";
-		cin >> l >> endl;
+		gets(l);
 		Fr<<l<<endl;
 		cout << "issuer: ";
-		cin >> l >> endl;
+		gets(l);
 		Fr<<l<<endl;
 		cout << "form: ";
-		cin >> l >> endl;
+		gets(l);
 		Fr<<l<<endl;
 		cout << "material:  ";
-		cin >> l >> endl;
+		gets(l);
 		Fr<<l<<endl;
-		Fr.close;
+		//Fr.close;
 		
 	return 0;
+}
 };
 
 class virtM: public Marka
@@ -51,28 +54,29 @@ class virtM: public Marka
 public:
 	int createM ()
 	{
-		string l;
-		ofstream Fv;
-		Fv("real.txt");
+		char l[255];
+		ofstream Fv("C:\real.txt");
+		
 		cout << "state: ";
-		cin >> l >> endl;
+		gets(l);
 		Fv<<l<<endl;
 		cout << "appointment: ";
-		cin >> l >> endl;
+		gets(l);
 		Fv<<l<<endl;
 		cout << "issuer: ";
-		cin >> l >> endl;
+		gets(l);
 		Fv<<l<<endl;
 		cout << "form: ";
-		cin >> l >> endl;
+		gets(l);
 		Fv<<l<<endl;
 		cout << "material:  ";
-		cin >> l >> endl;
+		gets(l);
 		Fv<<l<<endl;
-		Fv.close;
+		//Fv.close;
 
 	return 0;
 
+}
 };
 
 
@@ -92,11 +96,11 @@ class Man
 		int sw;
 		cout << "1-download 2-create new" << endl;
 		cin >> sw;
-		if (sw == 2)
+		if (sw == 1)
 		{
 			downlS ();
 		}
-		if (sw == 1)
+		if (sw == 2)
 		{
 			addM();
 		}
@@ -105,40 +109,40 @@ class Man
 	
 	int downlS ()
 	{
-		string l ;
-		ifstream F;
-		F.open("sbornik.txt");
+		char l[255];
+		ifstream F("C:\sbornik.txt");
+		
 		while (!F.eof())
 		{
-			F.getline(l);
-			if (strcmp(l,"real"))
+			F.getline(l,255);
+			if (l[1] =='r')
 			{
 				int count=0;
-				ofstream Fr;
-				Fr("real.txt")
+				ofstream Fr("C:\real.txt");
+				
 				while(count<5)
 				{
-					F.getline(l);
+					F.getline(l,255);
 					Fr<<l<<endl;
 					count ++;
 				}
-				Fr.close;
+				//Fr.close;
 			}
 			else
 			{
 				int count=0;
-				ofstream Fv;
-				Fv("virt.txt")
+				ofstream Fv("C:\virt.txt");
+				
 				while(count<5)
 				{
-					F.getline(l);
+					F.getline(l,255);
 					Fv<<l<<endl;
 					count ++;
 				}
-				Fv.close;
+				//Fv.close;
 			}
 		}
-		F.close;
+		//F.close;
 		return 0;
 	}	
 	
@@ -153,24 +157,23 @@ class Man
 		if (sw == 2)
 		{
 			p = & vp;
-			p->createM()
+			p->createM();
 		}
 		if (sw == 1)
 		{
 			p = & rp;
-			p->createM()
+			p->createM();
 		}
 		return 0;
 	}	
 	
 		int showS ()
 	{
-		string l;
+		char l[255];
 		uplS();
-		string l;
-		ifstream fin;
-		fin("fin.txt");
-		fin.getline(l);
+		ifstream fin("C:\fin.txt");
+		
+		fin.getline(l,255);
 		cout << l;
 		
 		return 0;
@@ -178,39 +181,39 @@ class Man
 	
 		int uplS ()
 	{
-		string l;
-		ofstream fin;
-		fin("fin.txt");
-		ifstream fr;
-		fr ("real.txt");
-		fin « "-------Real state--------\n";
+		char l[255];
+		ofstream fin("C:\fin.txt");
+		
+		ifstream fr ("C:\real.txt");
+		
+		fin << "-------Real state--------\n";
 		while (!fr.eof())
 		{
-			fr.getline(l);
+			fr.getline(l,255);
 			fin << l << "\n";
 		}
 		fr.close();
 		
 		
-		ifstream fv;
-		fv ("virt.txt");
-		fin « "\n\n--------Virtual state--------\n";
+		ifstream fv ("C:\virt.txt");
+		
+		fin << "\n\n--------Virtual state--------\n";
 		while (!fv.eof())
 		{
-			fv.getline(l);
+			fv.getline(l,255);
 			fin << l << "\n";
 		}
 		fv.close();
 		
-		fin.close;
+		//fin.close;
 		
 		return 0;
 	}	
 	
-
+	//~Man();
 	
-	
-		int menu ()
+public:
+			int menu ()
 	{
 		int sw;
 		while (sw!=0)
@@ -226,19 +229,13 @@ class Man
             uplS();  
             break;  
          case 3:
-			addM();
+			fillS();
 			break;
       }  
-		}
 		
-	}	
-	~Man();
-	
-public:
-	int operate()	
-	{
-		menu();
+		
 	}
+	}	
 	
 };
 
@@ -246,6 +243,6 @@ public:
 int main ()
 {
 		Man A;
-		A.operate();
+		A.menu();
 		return 0;
 }
