@@ -8,6 +8,74 @@
 
 using namespace std;
 
+class Marka 
+{
+	int mmm;
+public:
+	virtual int createM() =0;
+	
+};
+
+class realM: public Marka
+{
+	
+public:
+	int createM ()
+	
+	{
+		string l;
+		ofstream Fr;
+		Fr("real.txt");
+		cout << "state: ";
+		cin >> l >> endl;
+		Fr<<l<<endl;
+		cout << "appointment: ";
+		cin >> l >> endl;
+		Fr<<l<<endl;
+		cout << "issuer: ";
+		cin >> l >> endl;
+		Fr<<l<<endl;
+		cout << "form: ";
+		cin >> l >> endl;
+		Fr<<l<<endl;
+		cout << "material:  ";
+		cin >> l >> endl;
+		Fr<<l<<endl;
+		Fr.close;
+		
+	return 0;
+};
+
+class virtM: public Marka
+{
+public:
+	int createM ()
+	{
+		string l;
+		ofstream Fv;
+		Fv("real.txt");
+		cout << "state: ";
+		cin >> l >> endl;
+		Fv<<l<<endl;
+		cout << "appointment: ";
+		cin >> l >> endl;
+		Fv<<l<<endl;
+		cout << "issuer: ";
+		cin >> l >> endl;
+		Fv<<l<<endl;
+		cout << "form: ";
+		cin >> l >> endl;
+		Fv<<l<<endl;
+		cout << "material:  ";
+		cin >> l >> endl;
+		Fv<<l<<endl;
+		Fv.close;
+
+	return 0;
+
+};
+
+
 class Man
 {
 	int N,st;
@@ -38,7 +106,7 @@ class Man
 	int downlS ()
 	{
 		string l ;
-		ofstream F;
+		ifstream F;
 		F.open("sbornik.txt");
 		while (!F.eof())
 		{
@@ -46,52 +114,96 @@ class Man
 			if (strcmp(l,"real"))
 			{
 				int count=0;
-				ifstream Fr;
+				ofstream Fr;
 				Fr("real.txt")
 				while(count<5)
-				F.getline(l);
-				Fr<<l<<endl;
-				cout ++;
+				{
+					F.getline(l);
+					Fr<<l<<endl;
+					count ++;
+				}
+				Fr.close;
 			}
 			else
 			{
 				int count=0;
-				ifstream Fv;
+				ofstream Fv;
 				Fv("virt.txt")
 				while(count<5)
-				F.getline(l);
-				Fv<<l<<endl;
-				cout ++;
+				{
+					F.getline(l);
+					Fv<<l<<endl;
+					count ++;
+				}
+				Fv.close;
 			}
 		}
-		
+		F.close;
 		return 0;
 	}	
 	
 	int addM ()
 	{
 		Marka *p;
+		realM  rp;
+		virtM vp;
 		int sw;
 		cout << "type of state: 1-real 2-virtual" << endl;
 		cin >> sw;
 		if (sw == 2)
 		{
-			downlS ();
+			p = & vp;
+			p->createM()
 		}
 		if (sw == 1)
 		{
-			addM();
+			p = & rp;
+			p->createM()
 		}
 		return 0;
 	}	
 	
 		int showS ()
 	{
+		string l;
+		uplS();
+		string l;
+		ifstream fin;
+		fin("fin.txt");
+		fin.getline(l);
+		cout << l;
+		
 		return 0;
 	}	
 	
 		int uplS ()
 	{
+		string l;
+		ofstream fin;
+		fin("fin.txt");
+		ifstream fr;
+		fr ("real.txt");
+		fin « "-------Real state--------\n";
+		while (!fr.eof())
+		{
+			fr.getline(l);
+			fin << l << "\n";
+		}
+		fr.close();
+		
+		
+		ifstream fv;
+		fv ("virt.txt");
+		fin « "\n\n--------Virtual state--------\n";
+		while (!fv.eof())
+		{
+			fv.getline(l);
+			fin << l << "\n";
+		}
+		fv.close();
+		
+		fin.close;
+		
 		return 0;
 	}	
 	
@@ -108,7 +220,7 @@ class Man
 		switch (sw)
 		{  
          case 1:  
-            showS(S);  
+            showS();  
             break;  
          case 2:  
             uplS();  
@@ -125,67 +237,15 @@ class Man
 public:
 	int operate()	
 	{
-		createS();
-		menu(S);
+		menu();
 	}
 	
 };
-class Marka 
-{
-	int mmm;
-public:
-	virtual int createM() =0;
-	
-};
 
-class realM: public Marka
-{
-	
-public:
-	int createM ()
-	
-	{
-		string l;
-		ifstream Fr;
-		Fr("real.txt");
-		cin >> "state: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >> "appointment: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >>"issuer: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >> "form: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >>"material: " >> l >> endl;
-
-		
-	return 0;
-};
-
-class virtM: public Marka
-{
-public:
-	int createM ()
-	{
-		string l;
-		ifstream Fr;
-		Fr("real.txt");
-		cin >> "state: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >> "appointment: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >>"issuer: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >> "form: " >> l >> endl;
-		Fr<<l<<endl;
-		cin >>"material: " >> l >> endl;
-
-	return 0;
-
-};
 
 int main ()
 {
 		Man A;
 		A.operate();
+		return 0;
 }
