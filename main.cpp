@@ -1,65 +1,106 @@
 #include <iostream>
 #include <vector>
 #include <stdio.h>
+#include <string>
+#include <fstream>
+#include <iomanip>
+#include <conio.h>
 
 using namespace std;
 
 class Man
 {
-	int N,sw;
+	int N,st;
 	int createS ()
 	{
 		cout << "vvedite kol-vo marok"<< endl;
 		cin >> N;
-		char ** S = new char *[N];
-		for (int i = 0; i <= Ns; i++)
-		S[i] = new char[300];
-		return **S;
+
+		return 0;
 	}
 	
-	int fillS (char **S)
+	int fillS ()
 	{
+		int sw;
 		cout << "1-download 2-create new" << endl;
 		cin >> sw;
 		if (sw == 2)
 		{
-			downlS (S);
+			downlS ();
 		}
 		if (sw == 1)
 		{
-			addM(S);
+			addM();
 		}
-		return **S;
+		return 0;
 	}
 	
-	int downlS (char **S)
+	int downlS ()
 	{
-		return **S;
+		string l ;
+		ofstream F;
+		F.open("sbornik.txt");
+		while (!F.eof())
+		{
+			F.getline(l);
+			if (strcmp(l,"real"))
+			{
+				int count=0;
+				ifstream Fr;
+				Fr("real.txt")
+				while(count<5)
+				F.getline(l);
+				Fr<<l<<endl;
+				cout ++;
+			}
+			else
+			{
+				int count=0;
+				ifstream Fv;
+				Fv("virt.txt")
+				while(count<5)
+				F.getline(l);
+				Fv<<l<<endl;
+				cout ++;
+			}
+		}
+		
+		return 0;
 	}	
 	
-	int addM (char **S)
+	int addM ()
 	{
-		return **S;
+		Marka *p;
+		int sw;
+		cout << "type of state: 1-real 2-virtual" << endl;
+		cin >> sw;
+		if (sw == 2)
+		{
+			downlS ();
+		}
+		if (sw == 1)
+		{
+			addM();
+		}
+		return 0;
 	}	
 	
-		int showS (char **S)
+		int showS ()
 	{
-		return **S;
+		return 0;
 	}	
 	
-		int uplS (char **S)
+		int uplS ()
 	{
-		return **S;
+		return 0;
 	}	
 	
-		int sortS (char **S)
-	{
-		return **S;
-	}	
+
 	
 	
-		int menu (char **S)
+		int menu ()
 	{
+		int sw;
 		while (sw!=0)
 		{
 		cout << "do: /n 1-show sbornik /n  2-upload into file /n 3-add /n 0-exit" << endl;
@@ -70,43 +111,78 @@ class Man
             showS(S);  
             break;  
          case 2:  
-            uplS(S);  
+            uplS();  
             break;  
          case 3:
-			addM(S);
+			addM();
 			break;
       }  
 		}
 		
 	}	
+	~Man();
 	
 public:
-	
 	int operate()	
 	{
 		createS();
 		menu(S);
 	}
 	
-}
+};
 class Marka 
 {
+	int mmm;
 public:
-	virtual int createM();
+	virtual int createM() =0;
 	
-}
+};
 
-class realM public Marka
+class realM: public Marka
+{
+	
+public:
+	int createM ()
+	
+	{
+		string l;
+		ifstream Fr;
+		Fr("real.txt");
+		cin >> "state: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >> "appointment: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >>"issuer: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >> "form: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >>"material: " >> l >> endl;
+
+		
+	return 0;
+};
+
+class virtM: public Marka
 {
 public:
-	int createM ();
-}
+	int createM ()
+	{
+		string l;
+		ifstream Fr;
+		Fr("real.txt");
+		cin >> "state: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >> "appointment: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >>"issuer: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >> "form: " >> l >> endl;
+		Fr<<l<<endl;
+		cin >>"material: " >> l >> endl;
 
-class virtM public Marka
-{
-public:
-	int createM ();
-}
+	return 0;
+
+};
 
 int main ()
 {
